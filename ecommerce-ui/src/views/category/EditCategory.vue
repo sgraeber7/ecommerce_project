@@ -46,7 +46,6 @@ export default {
       description: null,
       imageUrl: null,
       categoryIndex: null,
-      // baseUrl: "https://limitless-lake-55070.herokuapp.com/",
     }
   },
   props: ["baseUrl", "categories"],

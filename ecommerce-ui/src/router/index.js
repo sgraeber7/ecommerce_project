@@ -2,8 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AddCategory from '../views/category/AddCategory'
 import CategoryView from '../views/category/CategoryView'
-import AboutView from '../views/AboutView.vue'
 import EditCategory from '../views/category/EditCategory'
+import AddProduct from '../views/product/AddProduct'
+import ProductView from '../views/product/ProductView'
+import EditProduct from '../views/product/EditProduct'
 
 const routes = [
   {
@@ -11,15 +13,15 @@ const routes = [
     name: 'home',
     component: HomeView
   },
-  {
-    path: '/about',
-    name: 'About',
-    component: AboutView
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    // component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  },
+  // {
+  //   path: '/about',
+  //   name: 'About',
+  //   component: AboutView
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   // component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+  // },
   {
     path: '/admin/category/add',
     name: "AddCategory",
@@ -34,6 +36,21 @@ const routes = [
     path: "/admin/category/:id",
     name: "EditCategory",
     component: EditCategory,
+  },
+  {
+    path: "/admin/product/add",
+    name: "AddProduct",
+    component: AddProduct,
+  },
+  {
+    path: "/admin/product",
+    name: "AdminProduct",
+    component: ProductView,
+  },
+  {
+    path: "/admin/product/:id",
+    name: "EditProduct",
+    component: EditProduct,
   },
 ]
 

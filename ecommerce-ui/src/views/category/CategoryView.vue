@@ -27,20 +27,21 @@ export default {
   components: { CategoryBox },
   data() {
     return {
-      baseUrl: "https://limitless-lake-55070.herokuapp.com/",
+      // baseUrl: "https://limitless-lake-55070.herokuapp.com/",
       categories: null,
     }
   },
   methods: {
     async getCategories() {
       // fetch categories
-      await axios.get(this.baseUrl + "category/")
+      await axios.get(this.$root.baseUrl + "category/")
         .then(res => this.categories = res.data)
         .catch(err => console.log(err))
     }
   },
   mounted() {
     this.getCategories();
+    console.log(this.$root.baseUrl);
   }
 }
 </script>

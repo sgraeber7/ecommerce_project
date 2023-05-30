@@ -28,10 +28,10 @@
           </div>
         </div>
       </form>
-      <div>
-        <router-link style="color: white" :to="{ name: 'AdminCategory' }">
-          Category
-        </router-link>
+      <div class="nav-link">
+        <router-link :to="{ name: 'AdminCategory' }">Category</router-link>
+        <span> | </span>
+        <router-link :to="{ name: 'AdminProduct' }">Products</router-link>
       </div>
     </div>
   </nav>
@@ -60,8 +60,8 @@ export default {
   margin-right: 20px;
 }
 
-.nav-link {
-  color: rgba(255, 255, 255);
+.nav-link>* {
+  color: white;
 }
 
 #search-button-navbar {

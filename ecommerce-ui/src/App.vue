@@ -20,6 +20,7 @@ const axios = require('axios')
 export default {
   data() {
     return {
+      // baseUrl: "http://localhost:8080/",
       baseUrl: "https://limitless-lake-55070.herokuapp.com/",
       products: null,
       categories: null
