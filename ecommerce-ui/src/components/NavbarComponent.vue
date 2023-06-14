@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <!--    Logo-->
-    <router-link class="navbar-brand" :to="{ name: 'home' }">
+    <router-link class="navbar-brand" :to="{ name: 'HomeView' }">
       <img id="logo" src="../assets/icon.png" />
     </router-link>
 

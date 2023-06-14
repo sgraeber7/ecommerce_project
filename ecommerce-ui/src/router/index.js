@@ -6,11 +6,12 @@ import EditCategory from '../views/category/EditCategory'
 import AddProduct from '../views/product/AddProduct'
 import ProductView from '../views/product/ProductView'
 import EditProduct from '../views/product/EditProduct'
+import ShowDetails from '../views/product/ShowDetails'
 
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'HomeView',
     component: HomeView
   },
   // {
@@ -52,11 +53,23 @@ const routes = [
     name: "EditProduct",
     component: EditProduct,
   },
+  {
+    path : '/product/show/:id',
+    name : 'ShowDetails',
+    component: ShowDetails
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
+});
+
+// Global navigation guard
+router.beforeEach((to, from, next) => {
+  window.scrollTo(0, 0); // Scrolls to the top of the page
+  next();
+});
+
 
 export default router

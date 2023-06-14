@@ -5,7 +5,9 @@
       <img class="card-img-top embed-responsive-item" :src="product.imageURL" alt="Product Image">
     </div>
     <div class="card-body">
-      <h3 class="card-title">{{ product.name }}</h3>
+      <router-link :to="{ name: 'ShowDetails', params: { id: product.id } }">
+        <h5 class="card-title">{{ product.name }}</h5>
+      </router-link>
       <p class="card-text"><sup>$</sup>{{ product.price }}</p>
       <p class="card-text font-italic">{{ product.description ? product.description.substring(0, 65) + '...' : '' }}</p>
       <router-link id="edit-product" :to="{ name: 'EditProduct', params: { id: product.id } }"
@@ -29,6 +31,11 @@ export default {
 </script>
 
 <style scoped>
+.card {
+  width: 20rem;
+  height: 24rem;
+}
+
 .embed-responsive .card-img-top {
   object-fit: cover;
 }

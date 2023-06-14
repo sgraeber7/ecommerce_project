@@ -43,7 +43,7 @@
       <div class="row">
         <div class="col-12">
           <div class="text-center py-5">
-            <router-link :to="{ name: 'home' }">
+            <router-link :to="{ name: 'HomeView' }">
               <img id="logo" src="../assets/icon.png" />
             </router-link>
           </div>

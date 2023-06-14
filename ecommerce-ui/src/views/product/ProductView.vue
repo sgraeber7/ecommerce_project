@@ -31,11 +31,6 @@ export default {
 </script>
 
 <style scoped>
-.card {
-  width: 20rem;
-  height: 24rem;
-}
-
 h4 {
   font-family: 'Roboto', sans-serif;
   color: #484848;
