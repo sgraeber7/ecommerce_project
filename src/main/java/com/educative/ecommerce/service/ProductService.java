@@ -2,11 +2,13 @@ package com.educative.ecommerce.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.educative.ecommerce.dto.product.ProductDto;
+import com.educative.ecommerce.exceptions.ProductNotExistException;
 import com.educative.ecommerce.model.Category;
 import com.educative.ecommerce.model.Product;
 import com.educative.ecommerce.repository.ProductRepository;
@@ -52,4 +54,12 @@ public class ProductService {
     // update
     productRepository.save(product);
   }
+
+  public Product getProductById(Integer productId) throws ProductNotExistException {
+    Optional<Product> optionalProduct = productRepository.findById(productId);
+    if (!optionalProduct.isPresent())
+      throw new ProductNotExistException("Product id is invalid " + productId);
+    return optionalProduct.get();
+  }
+
 }
