@@ -82,8 +82,7 @@ export default {
         // redirect to checkout page of stripe
         return this.stripe.redirectToCheckout({ sessionId: session.sessionId })
       })
-    }
-
+    },
   },
   mounted() {
     // get the token

@@ -5,7 +5,7 @@ import com.educative.ecommerce.dto.checkout.CheckoutItemDto;
 import com.educative.ecommerce.dto.checkout.StripeResponse;
 import com.educative.ecommerce.exceptions.AuthenticationFailException;
 import com.educative.ecommerce.exceptions.OrderNotFoundException;
-import com.educative.ecommerce.exceptions.ProductNotExistException;
+//import com.educative.ecommerce.exceptions.ProductNotExistException;
 import com.educative.ecommerce.model.Order;
 import com.educative.ecommerce.model.User;
 import com.educative.ecommerce.service.AuthenticationService;

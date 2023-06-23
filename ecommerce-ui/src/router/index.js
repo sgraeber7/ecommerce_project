@@ -14,6 +14,8 @@ import Success from "../views/payment/Success";
 import Failed from "../views/payment/Failed";
 import CheckoutView from "../views/checkout/CheckoutView";
 import CartView from "../views/cart/CartView";
+import OrderHistory from "../views/order/OrderHistory";
+import OrderDetails from "../views/order/OrderDetails";
 
 const routes = [
   {
@@ -100,6 +102,16 @@ const routes = [
     name : 'CheckoutView',
     component : CheckoutView
   },
+  {
+    path: '/orders',
+    name: 'OrderHistory',
+    component: OrderHistory
+  },
+  {
+    path:'/order/:id',
+    name:'OrderDetails',
+    component: OrderDetails
+  }
 ]
 
 const router = createRouter({
