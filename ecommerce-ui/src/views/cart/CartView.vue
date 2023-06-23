@@ -41,7 +41,8 @@
     <!-- display total price -->
     <div class="total-cost pt-2 text-right">
       <h5>Total : $ {{ totalcost }}</h5>
-      <button :disabled="isDisabled()" type="button" class="btn btn-primary confirm">Confirm Order</button>
+      <button :disabled="isDisabled()" type="button" class="btn btn-primary confirm" @click="checkout">Confirm
+        Order</button>
     </div>
   </div>
 </template>
@@ -91,7 +92,12 @@ export default {
         }, (error) => {
           console.log(error)
         })
-    }
+    },
+    // go to checkout page
+    checkout() {
+      this.$router.push({ name: 'CheckoutView' })
+    },
+
   },
 
   mounted() {

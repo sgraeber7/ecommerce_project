@@ -9,7 +9,11 @@ import EditProduct from '../views/product/EditProduct'
 import ShowDetails from '../views/product/ShowDetails'
 import SignupView from '../views/SignupView'
 import SigninView from "../views/SigninView"
-import WishList from "../views/product/WishList"; 
+import WishList from "../views/product/WishList";
+import Success from "../views/payment/Success";
+import Failed from "../views/payment/Failed";
+import CheckoutView from "../views/checkout/CheckoutView";
+import CartView from "../views/cart/CartView";
 
 const routes = [
   {
@@ -75,6 +79,26 @@ const routes = [
     path: '/wishlist',
     name: 'WishList',
     component: WishList
+  },
+  {
+    path : '/cart',
+    name : 'CartView',
+    component : CartView
+  },
+  {
+    path: '/payment/success',
+    name: 'PaymentSuccess',
+    component:Success
+  },
+  {
+    path: '/payment/failed',
+    name: 'FailedPayment',
+    component:Failed
+  },
+  {
+    path : '/checkout',
+    name : 'CheckoutView',
+    component : CheckoutView
   },
 ]
 
