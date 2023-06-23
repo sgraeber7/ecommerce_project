@@ -73,16 +73,18 @@ public class CartController {
     return new ResponseEntity<CartDto>(cartDto, HttpStatus.OK);
   }
 
-  // task delete cart item
-  @DeleteMapping("/delete/{cartItemId}")
-  public ResponseEntity<ApiResponse> deleteCartItem(@PathVariable("cartItemId") int cartItemId,
-      @RequestParam("token") String token)
-      throws AuthenticationFailException, CartItemNotExistException {
-    authenticationService.authenticate(token);
-    User user = authenticationService.getUser(token);
-    // method to be completed
-    cartService.deleteCartItem(cartItemId, user);
-    return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Item has been removed"), HttpStatus.OK);
-  }
+  // // TODO task delete cart item
+  // @DeleteMapping("/delete/{cartItemId}")
+  // public ResponseEntity<ApiResponse> deleteCartItem(@PathVariable("cartItemId")
+  // int cartItemId,
+  // @RequestParam("token") String token)
+  // throws AuthenticationFailException, CartItemNotExistException {
+  // authenticationService.authenticate(token);
+  // User user = authenticationService.getUser(token);
+  // // method to be completed
+  // cartService.deleteCartItem(cartItemId, user);
+  // return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Item has been
+  // removed"), HttpStatus.OK);
+  // }
 
 }

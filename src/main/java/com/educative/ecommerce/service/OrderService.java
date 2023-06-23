@@ -1,6 +1,14 @@
 package com.educative.ecommerce.service;
 
+import com.educative.ecommerce.dto.cart.CartDto;
+import com.educative.ecommerce.dto.cart.CartItemDto;
 import com.educative.ecommerce.dto.checkout.CheckoutItemDto;
+import com.educative.ecommerce.exceptions.OrderNotFoundException;
+import com.educative.ecommerce.model.Order;
+import com.educative.ecommerce.model.OrderItem;
+import com.educative.ecommerce.model.User;
+import com.educative.ecommerce.repository.OrderItemsRepository;
+import com.educative.ecommerce.repository.OrderRepository;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
@@ -11,7 +19,9 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -20,13 +30,19 @@ public class OrderService {
   @Autowired
   private CartService cartService;
 
+  @Autowired
+  OrderRepository orderRepository;
+
+  @Autowired
+  OrderItemsRepository orderItemsRepository;
+
   @Value("${BASE_URL}")
   private String baseURL;
 
   @Value("${STRIPE_SECRET_KEY}")
   private String apiKey;
 
-  // create total price and send productname as input
+  // create total price
   SessionCreateParams.LineItem.PriceData createPriceData(CheckoutItemDto checkoutItemDto) {
     return SessionCreateParams.LineItem.PriceData.builder()
         .setCurrency("usd")
@@ -74,5 +90,65 @@ public class OrderService {
         .setSuccessUrl(successURL)
         .build();
     return Session.create(params);
+  }
+
+  public void placeOrder(User user, String sessionId) {
+    // first let get cart items for the user
+    CartDto cartDto = cartService.listCartItems(user);
+
+    List<CartItemDto> cartItemDtoList = cartDto.getcartItems();
+
+    // create the order and save it
+    Order newOrder = new Order();
+    newOrder.setCreatedDate(new Date());
+    newOrder.setSessionId(sessionId);
+    newOrder.setUser(user);
+    newOrder.setTotalPrice(cartDto.getTotalCost());
+    orderRepository.save(newOrder);
+
+    for (CartItemDto cartItemDto : cartItemDtoList) {
+      // create orderItem and save each one
+      OrderItem orderItem = new OrderItem();
+      orderItem.setCreatedDate(new Date());
+      orderItem.setPrice(cartItemDto.getProduct().getPrice());
+      orderItem.setProduct(cartItemDto.getProduct());
+      orderItem.setQuantity(cartItemDto.getQuantity());
+      orderItem.setOrder(newOrder);
+      // add to order item list
+      orderItemsRepository.save(orderItem);
+    }
+
+    //
+    cartService.deleteUserCartItems(user);
+  }
+
+  public List<Order> listOrders(User user) {
+    return orderRepository.findAllByUserOrderByCreatedDateDesc(user);
+  }
+
+  // find the order by id, validate if the order belong to user and return
+  public Order getOrder(Integer orderId, User user) throws OrderNotFoundException {
+    // 1. validate the order
+    // if the order not valid throw exception
+
+    Optional<Order> optionalOrder = orderRepository.findById(orderId);
+
+    if (optionalOrder.isEmpty()) {
+      /// throw exception
+      throw new OrderNotFoundException("order id is not valid");
+    }
+
+    // check if the order belongs to user
+
+    Order order = optionalOrder.get();
+
+    if (order.getUser() != user) {
+      // else throw OrderNotFoundException
+      throw new OrderNotFoundException("order does not belong to user");
+    }
+
+    // return the order
+
+    return order;
   }
 }
